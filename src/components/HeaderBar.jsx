@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
 
+// For the AppBar on the top of the page
 const HeaderBar = () => {
   return (
     <AppBar sw={{ color: 'white' }} position='relative'>

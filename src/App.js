@@ -9,7 +9,6 @@ function App() {
       <HeaderBar />
       <Header />
       <SearchBar />
-      
     </div>
   );
 }
