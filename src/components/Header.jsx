@@ -1,17 +1,8 @@
-import { Box, Typography, Container, AppBar, Toolbar } from '@mui/material';
-import ImageSearchIcon from '@mui/icons-material/ImageSearch';
-import SearchBar from './SearchBar';
+import { Box, Typography, Container } from '@mui/material';
 
 const Header = () => {
   return (
     <div>
-      <AppBar sw={{ color: 'white' }} position='relative'>
-        <Toolbar>
-          <ImageSearchIcon sx={{ mr: 2 }} />
-          <Typography variant='h6'>Text to Image</Typography>
-        </Toolbar>
-      </AppBar>
-
       <Container maxWidth='md' sx={{ mt: '5rem', textAlign: 'center' }}>
         <Box>
           <Typography variant='h4' component='h1' gutterBottom>
@@ -25,7 +16,6 @@ const Header = () => {
             AI functionality provided by DeepAI API.
           </Typography>
         </Box>
-        <SearchBar />
       </Container>
     </div>
   );

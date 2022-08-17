@@ -5,12 +5,11 @@ import {
   Typography,
   Tooltip,
 } from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
-import PublishIcon from '@mui/icons-material/Publish';
 import SearchIcon from '@mui/icons-material/Search';
 import CancelIcon from '@mui/icons-material/Cancel';
 
 import { useState } from 'react';
+import Button from './Button';
 
 const SearchBar = () => {
   const [inputValue, setInputValue] = useState('');
@@ -54,17 +53,7 @@ const SearchBar = () => {
           ),
         }}
       />
-      <LoadingButton
-        sx={{ my: '1rem', borderRadius: '20px' }}
-        onClick={(e) => onHandleSubmit(e)}
-        variant='contained'
-        color='primary'
-        loading={isLoading}
-        loadingPosition='start'
-        startIcon={<PublishIcon />}
-      >
-        {isLoading ? 'Generating...' : 'Generate Image'}
-      </LoadingButton>
+      <Button isLoading={isLoading} onHandleSubmit={onHandleSubmit} />
       {isLoading ? (
         <Tooltip title='Cancel image generation' arrow placement='right'>
           <CancelIcon
