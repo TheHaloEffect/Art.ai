@@ -22,7 +22,7 @@ const Header = () => {
             trees" to "dog with a gun"
           </Typography>
           <Typography variant='subtitle2' component='h2'>
-            AI functionality provided by DeepAPI
+            AI functionality provided by DeepAI API.
           </Typography>
         </Box>
         <SearchBar />

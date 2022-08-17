@@ -1,9 +1,9 @@
 import {
   Box,
   TextField,
-  Button,
   InputAdornment,
   Typography,
+  Tooltip,
 } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import PublishIcon from '@mui/icons-material/Publish';
@@ -66,7 +66,17 @@ const SearchBar = () => {
         {isLoading ? 'Generating...' : 'Generate Image'}
       </LoadingButton>
       {isLoading ? (
-        <Typography variant='subtitle1'>This may take a minute or 2</Typography>
+        <Tooltip title='Cancel image generation' arrow placement='right'>
+          <CancelIcon
+            style={{ marginBottom: '1rem', cursor: 'pointer' }}
+            onClick={() => setIsLoading(false)}
+          />
+        </Tooltip>
+      ) : null}
+      {isLoading ? (
+        <Typography variant='subtitle1'>
+          This may take a minute or 2. Please wait.
+        </Typography>
       ) : (
         ''
       )}
