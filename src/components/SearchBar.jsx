@@ -1,16 +1,49 @@
-import { Box, TextField, Button, InputAdornment } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Button,
+  InputAdornment,
+  Typography,
+} from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import PublishIcon from '@mui/icons-material/Publish';
 import SearchIcon from '@mui/icons-material/Search';
+import CancelIcon from '@mui/icons-material/Cancel';
+
+import { useState } from 'react';
 
 const SearchBar = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onInputChange = (e) => {
+    setInputValue(e.target.value);
+    if (isError && e.target.value.length > 0) {
+      setIsError(false);
+    }
+  };
+
+  const onHandleSubmit = (e) => {
+    if (inputValue.length === 0) {
+      setIsError(true);
+    } else {
+      setIsLoading(true);
+    }
+  };
+
   return (
     <Box
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       <TextField
-        sx={{ mt: '4rem', width: '50%' }}
+        error={isError}
+        helperText={isError ? 'Please enter some text first' : ''}
+        onChange={(e) => onInputChange(e)}
+        disabled={isLoading}
+        sx={{ mt: '4rem' }}
         id='standard-search'
-        label='Search field'
+        label='Enter text'
         type='search'
         variant='standard'
         InputProps={{
@@ -21,17 +54,22 @@ const SearchBar = () => {
           ),
         }}
       />
-      <Button
-        sx={{ mt: '1rem', borderRadius: '20px' }}
-        onClick={() => {
-          console.log('hello');
-        }}
+      <LoadingButton
+        sx={{ my: '1rem', borderRadius: '20px' }}
+        onClick={(e) => onHandleSubmit(e)}
         variant='contained'
         color='primary'
+        loading={isLoading}
+        loadingPosition='start'
         startIcon={<PublishIcon />}
       >
-        Create Image
-      </Button>
+        {isLoading ? 'Generating...' : 'Generate Image'}
+      </LoadingButton>
+      {isLoading ? (
+        <Typography variant='subtitle1'>This may take a minute or 2</Typography>
+      ) : (
+        ''
+      )}
     </Box>
   );
 };

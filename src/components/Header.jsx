@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 const Header = () => {
   return (
     <div>
-      <AppBar position='relative'>
+      <AppBar sw={{ color: 'white' }} position='relative'>
         <Toolbar>
           <ImageSearchIcon sx={{ mr: 2 }} />
           <Typography variant='h6'>Text to Image</Typography>
