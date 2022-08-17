@@ -1,4 +1,5 @@
 import { Container, Box } from '@mui/material';
+import DownloadIcon from '@mui/icons-material/Download';
 
 const ResultImage = ({ imageURL }) => {
   return (
@@ -6,14 +7,16 @@ const ResultImage = ({ imageURL }) => {
       <Box
         component='img'
         sx={{
-          height: '250px',
-          width: '250px',
+          height: '350px',
+          width: '350px',
           borderRadius: '20px',
           boxShadow: '3',
+          mb: '2rem',
         }}
         alt='The result image'
         src={imageURL}
       ></Box>
+      <DownloadIcon styles={{ cursor: 'pointer' }} />
     </Container>
   );
 };

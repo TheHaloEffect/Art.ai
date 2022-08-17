@@ -8,7 +8,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from './Button';
 import ResultImage from './ResultImage';
 
@@ -17,15 +17,21 @@ const deepai = require('deepai');
 deepai.setApiKey(process.env.REACT_APP_API_KEY);
 
 const SearchBar = () => {
-  const [inputValue, setInputValue] = useState(
-    'An astronaut riding a horse in space'
-  );
-  const [resultImage, setResultImage] = useState(
-    'https://api.deepai.org/job-view-file/7a9c2dae-03b0-46f8-b890-8891ef422178/outputs/output.jpg'
-  );
+  const [inputValue, setInputValue] = useState(() => {
+    const saved = localStorage.getItem('textInput');
+    const initialValue = JSON.parse(saved);
+    console.log(initialValue);
+    return initialValue || '';
+  });
+
+  const [resultImage, setResultImage] = useState('');
   const [isError, setIsError] = useState(false);
   const [isApiError, setApiError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('textInput', JSON.stringify(inputValue));
+  }, [inputValue]);
 
   const onSearchAPI = async () => {
     try {
@@ -44,11 +50,15 @@ const SearchBar = () => {
   const onInputChange = (e) => {
     setInputValue(e.target.value);
 
-    // The error message is removed if the user starts typing again
+    // Error messages are removed if the user starts typing again
     if (isError && e.target.value.length > 0) {
       setIsError(false);
     }
     if (isApiError && e.target.value.length > 0) {
+      setApiError(false);
+    }
+
+    if (isApiError && isLoading) {
       setApiError(false);
     }
   };
@@ -75,7 +85,10 @@ const SearchBar = () => {
     >
       <TextField
         error={isError}
-        style={{ width: '15rem' }}
+        style={{
+          width: '320px',
+          minWidth: '150px',
+        }}
         helperText={isError ? 'Please enter some text first' : ''}
         onChange={(e) => onInputChange(e)}
         disabled={isLoading}
@@ -84,7 +97,7 @@ const SearchBar = () => {
         id='outlined-search'
         label='Enter text'
         type='search'
-        defaultValue='An astronaut riding a horse in space'
+        defaultValue={inputValue}
         InputProps={{
           endAdornment: (
             <InputAdornment position='end'>
@@ -112,10 +125,20 @@ const SearchBar = () => {
         ) : null}
       </Box>
 
-      {isLoading ? (
-        <Typography variant='subtitle1'>
-          This may take up to 2 minutes. Please wait.
+      {isApiError ? (
+        <Typography color='red' variant='subtitle1'>
+          Issue with the API. Please try again.
         </Typography>
+      ) : (
+        ''
+      )}
+
+      {isLoading ? (
+        <Box sw={{ backgroundColor: 'red' }}>
+          <Typography variant='subtitle1'>
+            This may take up to 2 minutes. Please wait.
+          </Typography>
+        </Box>
       ) : (
         ''
       )}
