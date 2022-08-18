@@ -14,11 +14,10 @@ import ResultImage from './ResultImage';
 
 // For the API
 const deepai = require('deepai');
-deepai.setApiKey(process.env.REACT_APP_API_KEY);
+deepai.setApiKey(process.env.API_KEY);
 
 const SearchBar = () => {
   const [inputValue, setInputValue] = useState(() => {
-    
     // Looks for the input value in the local storage
     const saved = localStorage.getItem('textInput');
     const initialValue = JSON.parse(saved);
