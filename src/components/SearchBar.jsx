@@ -31,21 +31,9 @@ const SearchBar = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    console.log(process.env.PRACTICE_VALUE);
     localStorage.setItem('textInput', JSON.stringify(inputValue));
   }, [inputValue]);
-
-  // const onSearchAPI = async () => {
-  //   try {
-  //     const res = await deepai.callStandardApi('text2img', {
-  //       text: inputValue,
-  //     });
-  //     setResultImage(res.output_url);
-  //   } catch (err) {
-  //     setApiError(true);
-  //   }
-
-  //   setIsLoading(false);
-  // };
 
   const onSearchAPI = async () => {
     const baseUrl = 'https://api.deepai.org/api/text2img';
