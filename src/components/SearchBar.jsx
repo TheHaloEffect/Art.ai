@@ -11,6 +11,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { useEffect, useState } from 'react';
 import Button from './Button';
 import ResultImage from './ResultImage';
+import axios from 'axios';
 
 // For the API
 const deepai = require('deepai');
@@ -33,12 +34,37 @@ const SearchBar = () => {
     localStorage.setItem('textInput', JSON.stringify(inputValue));
   }, [inputValue]);
 
+  // const onSearchAPI = async () => {
+  //   try {
+  //     const res = await deepai.callStandardApi('text2img', {
+  //       text: inputValue,
+  //     });
+  //     setResultImage(res.output_url);
+  //   } catch (err) {
+  //     setApiError(true);
+  //   }
+
+  //   setIsLoading(false);
+  // };
+
   const onSearchAPI = async () => {
+    const baseUrl = 'https://api.deepai.org/api/text2img';
+
+    const headers = {
+      headers: {
+        'Api-Key': '/.netlify/functions/api',
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
+    const data = {
+      text: inputValue,
+    };
+
     try {
-      const res = await deepai.callStandardApi('text2img', {
-        text: inputValue,
-      });
-      setResultImage(res.output_url);
+      const res = await axios.post(baseUrl, data, headers);
+      console.log(res);
+      setResultImage(res.data.output_url);
     } catch (err) {
       setApiError(true);
     }
