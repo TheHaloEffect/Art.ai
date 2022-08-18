@@ -18,9 +18,10 @@ deepai.setApiKey(process.env.REACT_APP_API_KEY);
 
 const SearchBar = () => {
   const [inputValue, setInputValue] = useState(() => {
+    
+    // Looks for the input value in the local storage
     const saved = localStorage.getItem('textInput');
     const initialValue = JSON.parse(saved);
-    console.log(initialValue);
     return initialValue || '';
   });
 

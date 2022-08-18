@@ -1,13 +1,17 @@
-import { AppBar, Toolbar, Typography } from '@mui/material';
-import ImageSearchIcon from '@mui/icons-material/ImageSearch';
+import { AppBar, Toolbar, Box } from '@mui/material';
+import logo from '../images/logo-50x50.png';
 
 // For the AppBar on the top of the page
 const HeaderBar = () => {
   return (
     <AppBar sw={{ color: 'white' }} position='relative'>
       <Toolbar>
-        <ImageSearchIcon sx={{ mr: 2 }} />
-        <Typography variant='h6'>Text to Image</Typography>
+        <Box
+          as='img'
+          src={logo}
+          alt='logo'
+          sw={{ height: '50px', width: '50px' }}
+        ></Box>
       </Toolbar>
     </AppBar>
   );

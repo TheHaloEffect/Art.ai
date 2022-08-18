@@ -1,5 +1,6 @@
-import { Container, Box } from '@mui/material';
+import { Container, Box, Tooltip } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
+import { saveAs } from 'file-saver';
 
 const ResultImage = ({ imageURL }) => {
   return (
@@ -16,7 +17,13 @@ const ResultImage = ({ imageURL }) => {
         alt='The result image'
         src={imageURL}
       ></Box>
-      <DownloadIcon styles={{ cursor: 'pointer' }} />
+      <Tooltip title='Download image' arrow placement='right'>
+        <DownloadIcon
+          sw={{ cursor: 'pointer' }}
+          style={{ cursor: 'pointer' }}
+          onClick={() => saveAs(imageURL, 'output.jpg')}
+        />
+      </Tooltip>
     </Container>
   );
 };
