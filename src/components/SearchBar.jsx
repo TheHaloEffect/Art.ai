@@ -52,7 +52,7 @@ const SearchBar = () => {
 
     const headers = {
       headers: {
-        'Api-Key': '/.netlify/functions/api',
+        'Api-Key': process.env.API_KEY,
         'Content-Type': 'multipart/form-data',
       },
     };
