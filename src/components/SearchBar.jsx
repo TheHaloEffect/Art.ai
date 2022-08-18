@@ -31,7 +31,6 @@ const SearchBar = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(process.env.PRACTICE_VALUE);
     localStorage.setItem('textInput', JSON.stringify(inputValue));
   }, [inputValue]);
 
@@ -40,7 +39,7 @@ const SearchBar = () => {
 
     const headers = {
       headers: {
-        'Api-Key': process.env.API_KEY,
+        'Api-Key': process.env.REACT_APP_API_KEY,
         'Content-Type': 'multipart/form-data',
       },
     };
