@@ -2,7 +2,7 @@
 
 ## Description
 - Text to image generator web app made with React and Material UI component library.
-- Uses the [Text to Image API from DeepAI](https://deepai.org/machine-learning-model/text2img) for AI functionality
+- Uses the [Text to Image API from DeepAI](https://deepai.org/machine-learning-model/text2img) for AI functionality.
 - Available as a Progressive Web App.
 
 ## How it Works
