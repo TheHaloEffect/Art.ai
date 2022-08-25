@@ -1,7 +1,6 @@
 # Art.ai
 
-## App Link
-https://art-ai.vercel.app/
+## [App Link](https://art-ai.vercel.app/)
 
 ### Description
 - Text to image generator web app made with React and Material UI component library.
